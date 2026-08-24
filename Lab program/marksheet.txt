@@ -1,0 +1,27 @@
+calculate percentage of 5 subject marks taken as a user input 
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    python NUMBER;
+    java NUMBER;
+    ds NUMBER;
+    dbms NUMBER;
+    typescript NUMBER;
+    total NUMBER;
+    percentage NUMBER;
+
+BEGIN
+    python := &python;
+    java := &java;
+    ds := &ds;
+    dbms := &dbms;
+    typescript := &typescript;
+
+    total := python + java + ds + dbms + typescript;
+    percentage := (total / 500) * 100;
+
+    DBMS_OUTPUT.PUT_LINE('Total Marks = ' || total);
+    DBMS_OUTPUT.PUT_LINE('Percentage = ' || percentage || '%');
+END;
+/

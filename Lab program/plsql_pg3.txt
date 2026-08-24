@@ -1,0 +1,19 @@
+--To Calculate Salary
+SET SERVEROUTPUT ON;
+DECLARE
+	basic number(10);
+	ta number(10);
+	da number(10);
+	hr number(10);
+	deduction number(10);
+	gross number(10);
+BEGIN
+	basic := &basic;
+	ta := &ta;
+	da := &da;
+	hr := &hr;
+	deduction := &deduction;
+	gross := basic+ta+da+hr-deduction;
+	dbms_output.put_line('Total Salary is: '|| gross);
+END;
+/	
