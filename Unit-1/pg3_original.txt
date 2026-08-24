@@ -1,0 +1,97 @@
+-- Write a program to claculate grade
+
+CREATE TABLE RESULT1 (
+	Rollno NUMBER(5) PRIMARY KEY,
+	Name VARCHAR2(50),
+	sub1 NUMBER(3) CHECK (sub1 BETWEEN 0 AND 100),
+	sub2 NUMBER(3) CHECK (sub2 BETWEEN 0 AND 100),
+	sub3 NUMBER(3) CHECK (sub3 BETWEEN 0 AND 100),
+	sub4 NUMBER(3) CHECK (sub4 BETWEEN 0 AND 100),
+	sub5 NUMBER(3) CHECK (sub5 BETWEEN 0 AND 100),
+	Total NUMBER(5),
+	Per NUMBER(5,2),
+	Grade VARCHAR2(2)
+);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (101, 'Harsh', 85, 90, 78, 88, 92);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (102, 'Rahul', 60, 55, 70, 65, 58);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (103, 'Priya', 95, 96, 98, 94, 97);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (104, 'Amit', 45, 52, 48, 50, 55);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (105, 'Neha', 72, 68, 75, 70, 74);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (106, 'Karan', 30, 65, 72, 80, 69);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (107, 'Sneha', 88, 84, 91, 86, 90);
+
+INSERT INTO RESULT1 (Rollno, Name, sub1, sub2, sub3, sub4, sub5)
+VALUES (108, 'Riya', 50, 47, 55, 60, 52);
+
+COMMIT;
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    rno RESULT1.Rollno%TYPE;
+    sname RESULT1.Name%TYPE;
+    s1 RESULT1.sub1%TYPE;
+    s2 RESULT1.sub2%TYPE;
+    s3 RESULT1.sub3%TYPE;                           
+    s4 RESULT1.sub4%TYPE;
+    s5 RESULT1.sub5%TYPE;
+    total RESULT1.Total%TYPE;
+    per RESULT1.Per%TYPE;
+    grade RESULT1.Grade%TYPE;
+
+BEGIN
+    rno := &Enter_Roll_No;
+
+    SELECT Name, sub1, sub2, sub3, sub4, sub5
+    INTO sname, s1, s2, s3, s4, s5
+    FROM RESULT1
+    WHERE Rollno = rno;
+
+    total := s1 + s2 + s3 + s4 + s5;
+    per := total / 5;
+
+    IF s1 < 35 OR s2 < 35 OR s3 < 35 OR s4 < 35 OR s5 < 35 THEN
+        grade := 'F';
+        DBMS_OUTPUT.PUT_LINE('RESULT : FAIL');
+    ELSE
+        IF per >= 90 THEN
+            grade := 'A+';
+        ELSIF per >= 80 THEN
+            grade := 'A';
+        ELSIF per >= 70 THEN
+            grade := 'B';
+        ELSIF per >= 60 THEN
+            grade := 'C';
+        ELSIF per >= 50 THEN
+            grade := 'D';
+        ELSE
+            grade := 'F';
+        END IF;
+
+        DBMS_OUTPUT.PUT_LINE('RESULT : PASS');
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('---------------------------------------------');
+    DBMS_OUTPUT.PUT_LINE('Roll No     : ' || rno);
+    DBMS_OUTPUT.PUT_LINE('Name        : ' || sname);
+    DBMS_OUTPUT.PUT_LINE('Total       : ' || total);
+    DBMS_OUTPUT.PUT_LINE('Percentage  : ' || per || '%');
+    DBMS_OUTPUT.PUT_LINE('Grade       : ' || grade);
+    DBMS_OUTPUT.PUT_LINE('---------------------------------------------');
+
+END;
+/

@@ -1,0 +1,61 @@
+CREATE TABLE RESULT (
+    RollNo NUMBER(5) PRIMARY KEY,
+    Name VARCHAR2(30),
+    Sub1 NUMBER(3),
+    Sub2 NUMBER(3),
+    Sub3 NUMBER(3),
+    Sub4 NUMBER(3),
+    Sub5 NUMBER(3),
+    Total NUMBER(5),
+    Per NUMBER(5,2),
+    Grade VARCHAR2(2)
+);
+
+
+
+INSERT INTO RESULT VALUES (101,'Harsh',80,75,90,85,70,NULL,NULL,NULL);
+INSERT INTO RESULT VALUES (102,'Amit',60,65,70,75,80,NULL,NULL,NULL);
+INSERT INTO RESULT VALUES (103,'Riya',90,95,92,88,91,NULL,NULL,NULL);
+
+COMMIT;
+
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    rno RESULT.RollNo%TYPE;
+    t NUMBER;
+    p NUMBER;
+    g VARCHAR2(2);
+BEGIN
+    rno := &RollNo;
+
+    SELECT Sub1+Sub2+Sub3+Sub4+Sub5,
+           (Sub1+Sub2+Sub3+Sub4+Sub5)/5
+    INTO t, p
+    FROM RESULT
+    WHERE RollNo = rno;
+
+    IF p >= 75 THEN
+        g := 'A';
+    ELSIF p >= 60 THEN
+        g := 'B';
+    ELSIF p >= 50 THEN
+        g := 'C';
+    ELSE
+        g := 'F';
+    END IF;
+
+    UPDATE RESULT
+    SET Total = t,
+        Per = p,
+        Grade = g
+    WHERE RollNo = rno;
+
+    DBMS_OUTPUT.PUT_LINE('Total = ' || t);
+    DBMS_OUTPUT.PUT_LINE('Percentage = ' || p);
+    DBMS_OUTPUT.PUT_LINE('Grade = ' || g);
+
+    COMMIT;
+END;
+/

@@ -1,0 +1,28 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    pname VARCHAR2(30);
+    qty NUMBER;
+    price NUMBER;
+    discount_per NUMBER;
+    total NUMBER;
+    discount_rs NUMBER;
+    net_amount NUMBER;
+BEGIN
+    pname := '&Product_Name';
+    qty := &Quantity;
+    price := &Price;
+    discount_per := &Discount_Percentage;
+
+    total := qty * price;
+    discount_rs := (total * discount_per) / 100;
+    net_amount := total - discount_rs;
+
+    DBMS_OUTPUT.PUT_LINE('Product Name      : ' || pname);
+    DBMS_OUTPUT.PUT_LINE('Quantity          : ' || qty);
+    DBMS_OUTPUT.PUT_LINE('Price             : ' || price);
+    DBMS_OUTPUT.PUT_LINE('Total Amount      : ' || total);
+    DBMS_OUTPUT.PUT_LINE('Discount (Rs.)    : ' || discount_rs);
+    DBMS_OUTPUT.PUT_LINE('Net Amount        : ' || net_amount);
+END;
+/
