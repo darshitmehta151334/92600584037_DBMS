@@ -1,0 +1,21 @@
+9. Write a PL/SQL block that calculates the simple interest based on given principal amount,
+rate of interest and number of years.
+--------------------------------------------------------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+p NUMBER;
+r NUMBER;
+n NUMBER;
+si NUMBER;
+BEGIN
+-- Accept inputs
+p := &principal;
+r := &rate;
+n := &years;
+-- Calculate Simple Interest
+si := (p * r * n) / 100;
+-- Display result
+DBMS_OUTPUT.PUT_LINE('Simple Interest = ' || si);
+END;
+/

@@ -1,0 +1,43 @@
+4. Write a PL/SQL block to accept an employee ID and:
+• Retrieve employee details
+• Calculate yearly salary
+• Display whether employee belongs to High Income (>
+₹600000/year) or Normal Income
+-------------------------------------------------------------------------------
+CREATE TABLE EMPLOYEE (
+EMPID NUMBER PRIMARY KEY,
+ENAME VARCHAR2(50),
+SALARY NUMBER(10,2)
+);
+Table created.
+INSERT INTO EMPLOYEE VALUES (101, 'Rahul', 50000);
+INSERT INTO EMPLOYEE VALUES (102, 'Amit', 40000);
+INSERT INTO EMPLOYEE VALUES (103, 'Priya', 70000);
+INSERT INTO EMPLOYEE VALUES (104, 'Neha', 30000);
+COMMIT;
+SET SERVEROUTPUT ON;
+DECLARE
+v_empid EMPLOYEE.EMPID%TYPE := &EMPID;
+v_name EMPLOYEE.ENAME%TYPE;
+v_salary EMPLOYEE.SALARY%TYPE;
+yearly_salary NUMBER;
+BEGIN
+SELECT ENAME, SALARY INTO v_name, v_salary FROM EMPLOYEE WHERE EMPID = v_empid;
+
+yearly_salary := v_salary * 12;
+DBMS_OUTPUT.PUT_LINE('Employee ID : ' || v_empid);
+
+DBMS_OUTPUT.PUT_LINE('Employee Name : ' || v_name);
+DBMS_OUTPUT.PUT_LINE('Monthly Salary: ' || v_salary);
+DBMS_OUTPUT.PUT_LINE('Yearly Salary : ' || yearly_salary);
+IF yearly_salary > 600000 THEN
+DBMS_OUTPUT.PUT_LINE('Income Status : High Income');
+ELSE
+DBMS_OUTPUT.PUT_LINE('Income Status : Normal Income');
+END IF;
+
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('Employee ID Not Found');
+END;
+/

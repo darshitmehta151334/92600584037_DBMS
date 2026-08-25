@@ -1,0 +1,33 @@
+1. Write a PL/SQL block to accept an employee's Basic Salary and
+calculate:
+• HRA = 20%
+• DA = 45%
+• TA = 8%
+• PF = 12%
+• Net Salary
+Display all salary components along with Net Salary.
+------------------------------------------------------------------------------------------
+SET SERVEROUTPUT ON;
+DECLARE
+basic_salary NUMBER := &basic_salary;
+hra NUMBER;
+da NUMBER;
+ta NUMBER;
+pf NUMBER;
+net_salary NUMBER;
+BEGIN
+hra := basic_salary * 0.20;
+da := basic_salary * 0.45;
+ta := basic_salary * 0.08;
+pf := basic_salary * 0.12;
+net_salary := basic_salary + hra + da + ta - pf;
+
+DBMS_OUTPUT.PUT_LINE('Basic Salary : ' || basic_salary);
+DBMS_OUTPUT.PUT_LINE('HRA : ' || hra);
+DBMS_OUTPUT.PUT_LINE('DA : ' || da);
+DBMS_OUTPUT.PUT_LINE('TA : ' || ta);
+DBMS_OUTPUT.PUT_LINE('PF : ' || pf);
+
+DBMS_OUTPUT.PUT_LINE('Net Salary : ' || net_salary);
+END;
+/

@@ -1,0 +1,66 @@
+2. Create a STUDENT table and write a PL/SQL block that accepts Roll
+Number and:
+• Calculates Total
+• Percentage
+• Assigns Grade
+Displays Pass/Fail status (Pass if all subjects ≥35).
+---------------------------------------------------------------------------------------------
+create table STUDENT1
+(
+rollno number primary key,
+name varchar(30),
+sub1 number,
+sub2 number,
+sub3 number
+);
+Table created.
+INSERT INTO STUDENT1 (Rollno, Name, sub1, sub2, sub3)
+VALUES (101, 'Harsh', 85, 90, 78);
+
+INSERT INTO STUDENT1 (Rollno, Name, sub1, sub2, sub3)
+VALUES (102, 'Rahul', 60, 55, 70);
+
+INSERT INTO STUDENT1 (Rollno, Name, sub1, sub2, sub3)
+VALUES (103, 'Priya', 95, 96, 98);
+
+INSERT INTO STUDENT1 (Rollno, Name, sub1, sub2, sub3)
+VALUES (104, 'Amit', 45, 52, 48);
+
+INSERT INTO STUDENT1 (Rollno, Name, sub1, sub2, sub3)
+VALUES (105, 'Neha', 72, 68, 75);
+
+SET SERVEROUTPUT ON;
+Declare
+rno student1.ROLLNO%TYPE := &ROLLNO;
+s1 STUDENT1.SUB1%TYPE;
+s2 STUDENT1.SUB2%TYPE;
+s3 STUDENT1.SUB3%TYPE;
+total NUMBER;
+per NUMBER;
+grade CHAR(1);
+Begin
+SELECT SUB1, SUB2, SUB3 INTO s1, s2, s3 FROM STUDENT1 WHERE ROLLNO = rno;
+total := s1 + s2 + s3;
+per := total / 3;
+if per >= 75 THEN
+grade := 'A';
+elsif per >= 60 THEN
+grade := 'B';
+elsif per >= 50 THEN
+grade := 'C';
+else
+grade := 'D';
+end if;
+dbms_output.put_line('Total : ' || total);
+
+dbms_output.put_line('Percentage : ' || ROUND(per,2));
+dbms_output.put_line('Grade : ' || grade);
+
+if s1 >= 35 AND s2 >= 35 AND s3 >= 35 THEN
+dbms_output.put_line('Status : PASS');
+else
+dbms_output.put_line('Status : FAIL');
+end if;
+
+END;
+/

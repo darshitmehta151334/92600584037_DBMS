@@ -1,0 +1,21 @@
+8. Write a PL/SQL block to delete the record of employee for given EID.
+-----------------------------------------------------------------------------------------------
+
+SET SERVEROUTPUT ON;
+DECLARE
+EID NUMBER;
+BEGIN
+-- Accept Employee ID
+EID := &EID;
+-- Delete record
+DELETE FROM EMP
+WHERE EID = EID;
+-- Check if record is deleted
+IF SQL%ROWCOUNT > 0 THEN
+DBMS_OUTPUT.PUT_LINE('Employee record deleted successfully.');
+ELSE
+DBMS_OUTPUT.PUT_LINE('Employee ID not found.');
+END IF;
+COMMIT;
+END;
+/

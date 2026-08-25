@@ -1,0 +1,30 @@
+3. Write a PL/SQL program to generate the multiplication table of a
+user-entered number using:
+• FOR LOOP
+• WHILE LOOP
+----------------------------------------------------------------------------------------
+1.for loop
+SET SERVEROUTPUT ON;
+DECLARE
+num NUMBER := &num;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Multiplication Table of ' || num);
+FOR i IN 1..10 LOOP
+DBMS_OUTPUT.PUT_LINE(num || ' x ' || i || ' = ' || (num * i));
+END LOOP;
+END;
+/
+------------------------------------------------------------------------------------------
+2. while loop
+SET SERVEROUTPUT ON;
+DECLARE
+num NUMBER := &num;
+i NUMBER := 1;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Multiplication Table of ' || num)
+WHILE i <= 10 LOOP
+DBMS_OUTPUT.PUT_LINE(num || ' x ' || i || ' = ' || (num * i));
+i := i + 1;
+END LOOP;
+END;
+/

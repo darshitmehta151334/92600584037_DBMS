@@ -1,0 +1,45 @@
+5. Write a PL/SQL block that accepts three numbers and displays:
+ Largest number
+ Smallest number
+ Average
+ Also, check whether all numbers are equal.
+-----------------------------------------------------------------------------------------
+SET SERVEROUTPUT ON;
+DECLARE
+n1 NUMBER := &n1;
+n2 NUMBER := &n2;
+n3 NUMBER := &n3;
+largest NUMBER;
+smallest NUMBER;
+average_num NUMBER;
+BEGIN
+IF n1 >= n2 AND n1 >= n3 THEN
+largest := n1;
+ELSIF n2 >= n1 AND n2 >= n3 THEN
+largest := n2;
+ELSE
+largest := n3;
+END IF;
+
+IF n1 <= n2 AND n1 <= n3 THEN
+smallest := n1;
+ELSIF n2 <= n1 AND n2 <= n3 THEN
+smallest := n2;
+ELSE
+
+smallest := n3;
+END IF;
+
+average_num := (n1 + n2 + n3) / 3;
+DBMS_OUTPUT.PUT_LINE('Largest Number : ' || largest);
+DBMS_OUTPUT.PUT_LINE('Smallest Number : ' || smallest);
+DBMS_OUTPUT.PUT_LINE('Average : ' || ROUND(average_num,2));
+
+IF n1 = n2 AND n2 = n3 THEN
+DBMS_OUTPUT.PUT_LINE('All numbers are equal.');
+ELSE
+DBMS_OUTPUT.PUT_LINE('All numbers are not equal.');
+END IF;
+
+END;
+/

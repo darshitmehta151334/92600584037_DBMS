@@ -1,0 +1,18 @@
+10. Write a PL/SQL block to calculate the square and cube of the given number.
+
+SET SERVEROUTPUT ON;
+DECLARE
+num NUMBER;
+square NUMBER;
+cube NUMBER;
+BEGIN
+-- Accept input
+num := &num;
+-- Calculate square and cube
+square := num * num;
+cube := num * num * num;
+-- Display result
+DBMS_OUTPUT.PUT_LINE('Square = ' || square);
+DBMS_OUTPUT.PUT_LINE('Cube = ' || cube);
+END;
+/
