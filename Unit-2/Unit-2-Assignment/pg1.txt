@@ -1,0 +1,42 @@
+6. Create a procedure that accepts Department Number and displays:
+
+ Total Employees
+ Average Salary
+ Maximum Salary
+Use OUT parameters.
+---------------------------------------------------------------------------------------------
+
+-- 1. Procedure Create
+CREATE OR REPLACE PROCEDURE DISPLAY(
+DPNO IN EMP.DEPTNO%TYPE,
+TOTAL_EMP OUT NUMBER,
+AVG_SALARY OUT NUMBER,
+MAX_SALARY OUT NUMBER
+) AS
+BEGIN
+SELECT COUNT(*),
+AVG(BASICSAL),
+MAX(BASICSAL)
+INTO TOTAL_EMP,
+AVG_SALARY,
+MAX_SALARY
+FROM EMP
+WHERE DEPTNO = DPNO;
+EXCEPTION
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('NOT FOUND');
+
+END;
+/
+-- 2. Create OUT Variables
+VAR TOTAL_EMP NUMBER;
+VAR AVG_SALARY NUMBER;
+VAR MAX_SALARY NUMBER;
+
+-- 3. Execute Procedure
+EXECUTE DISPLAY(10, :TOTAL_EMP, :AVG_SALARY, :MAX_SALARY);
+
+-- 4. Display Output
+PRINT TOTAL_EMP;
+PRINT AVG_SALARY;
+PRINT MAX_SALARY;
